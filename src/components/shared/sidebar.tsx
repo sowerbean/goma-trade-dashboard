@@ -5,6 +5,7 @@ import { useSidebar } from '@/hooks/use-sidebar';
 import { cn } from '@/lib/utils';
 import { ChevronsLeft } from 'lucide-react';
 import { useState } from 'react';
+import Logo from './logo';
 
 type SidebarProps = {
   className?: string;
@@ -31,10 +32,10 @@ export default function Sidebar({ className }: SidebarProps) {
       <div
         className={cn(
           'flex items-center px-0 py-5 md:px-2',
-          isMinimized ? 'justify-center ' : 'justify-between'
+          isMinimized ? 'justify-center' : 'justify-between'
         )}
       >
-        {!isMinimized && <h1 className="text-2xl font-bold">Logo</h1>}
+        {!isMinimized && <Logo />}
         <ChevronsLeft
           className={cn(
             'size-8 cursor-pointer rounded-full border bg-background text-foreground',

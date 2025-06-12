@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import ThemeProvider from './theme-provider';
 import { SidebarProvider } from '@/hooks/use-sidebar';
+import { DateFilterProvider } from './date-filter-provider'; //for date filtering
 
 export const queryClient = new QueryClient();
 
@@ -44,7 +45,9 @@ export default function AppProvider({
             <QueryClientProvider client={queryClient}>
               <ReactQueryDevtools />
               <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-                <SidebarProvider>{children}</SidebarProvider>
+                <SidebarProvider>
+                  <DateFilterProvider>{children}</DateFilterProvider>
+                </SidebarProvider>
               </ThemeProvider>
             </QueryClientProvider>
           </ErrorBoundary>

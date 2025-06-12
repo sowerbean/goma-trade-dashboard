@@ -2,29 +2,41 @@ import { NavItem } from '@/types';
 
 export const navItems: NavItem[] = [
   {
-    title: 'Dashboard',
+    title: 'Home',
     href: '/',
-    icon: 'dashboard',
-    label: 'Dashboard'
+    icon: 'dashboard', // must match a valid icon in your system
+    label: 'Home'
   },
   {
-    title: 'Students',
-    href: '/student',
-    icon: 'user',
-    label: 'Student'
+    title: 'Suppliers',
+    href: '/suppliers',
+    icon: 'suppliers',
+    label: 'Suppliers'
   },
   {
-    title: 'Login',
-    href: '/login',
-    icon: 'login',
-    label: 'Login'
+    title: 'Clients',
+    href: '/clients',
+    icon: 'clients',
+    label: 'Clients'
+  },
+  {
+    title: 'Network',
+    href: '/network',
+    icon: 'network',
+    label: 'Network'
+  },
+  {
+    title: 'About',
+    href: '/about',
+    icon: 'about',
+    label: 'About'
   }
 ];
 
 export const users = [
   {
     id: 1,
-    name: 'Candice Schiner',
+    name: 'Idrissa Elie',
     company: 'Dell',
     role: 'Frontend Developer',
     verified: false,
@@ -32,74 +44,10 @@ export const users = [
   },
   {
     id: 2,
-    name: 'John Doe',
+    name: 'Aganze Christian',
     company: 'TechCorp',
     role: 'Backend Developer',
     verified: true,
-    status: 'Active'
-  },
-  {
-    id: 3,
-    name: 'Alice Johnson',
-    company: 'WebTech',
-    role: 'UI Designer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 4,
-    name: 'David Smith',
-    company: 'Innovate Inc.',
-    role: 'Fullstack Developer',
-    verified: false,
-    status: 'Inactive'
-  },
-  {
-    id: 5,
-    name: 'Emma Wilson',
-    company: 'TechGuru',
-    role: 'Product Manager',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 6,
-    name: 'James Brown',
-    company: 'CodeGenius',
-    role: 'QA Engineer',
-    verified: false,
-    status: 'Active'
-  },
-  {
-    id: 7,
-    name: 'Laura White',
-    company: 'SoftWorks',
-    role: 'UX Designer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 8,
-    name: 'Michael Lee',
-    company: 'DevCraft',
-    role: 'DevOps Engineer',
-    verified: false,
-    status: 'Active'
-  },
-  {
-    id: 9,
-    name: 'Olivia Green',
-    company: 'WebSolutions',
-    role: 'Frontend Developer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 10,
-    name: 'Robert Taylor',
-    company: 'DataTech',
-    role: 'Data Analyst',
-    verified: false,
     status: 'Active'
   }
 ];

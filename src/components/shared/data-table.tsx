@@ -25,7 +25,10 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  useReactTable
+  useReactTable,
+  //sorting
+  getSortedRowModel,
+  SortingState
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import React from 'react';
@@ -42,7 +45,7 @@ export default function DataTable<TData, TValue>({
   columns,
   data,
   pageCount,
-  pageSizeOptions = [10, 20, 30, 40, 50]
+  pageSizeOptions = [20, 30, 50, 100]
 }: DataTableProps<TData, TValue>) {
   const [searchParams, setSearchParams] = useSearchParams();
   // Search params
@@ -50,9 +53,9 @@ export default function DataTable<TData, TValue>({
   const pageAsNumber = Number(page);
   const fallbackPage =
     isNaN(pageAsNumber) || pageAsNumber < 1 ? 1 : pageAsNumber;
-  const per_page = searchParams?.get('limit') ?? '10';
+  const per_page = searchParams?.get('limit') ?? '20';
   const perPageAsNumber = Number(per_page);
-  const fallbackPerPage = isNaN(perPageAsNumber) ? 10 : perPageAsNumber;
+  const fallbackPerPage = isNaN(perPageAsNumber) ? 20 : perPageAsNumber;
 
   // Handle server-side pagination
   const [{ pageIndex, pageSize }, setPagination] = React.useState({
@@ -70,43 +73,69 @@ export default function DataTable<TData, TValue>({
     // if search is there setting filter value
   }, [pageIndex, pageSize, searchParams, setSearchParams]);
 
+  //added sorting
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
-    pageCount: pageCount ?? -1,
+    pageCount,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      pagination: { pageIndex, pageSize }
-    },
-    onPaginationChange: setPagination,
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      pagination: { pageIndex, pageSize },
+      sorting
+    },
     manualPagination: true,
-    manualFiltering: true
+    manualFiltering: true,
+    // manualSorting: false, //false default, true -> server-side sorting
+    onSortingChange: setSorting,
+    onPaginationChange: setPagination
   });
 
   return (
     <>
       <ScrollArea className="h-[calc(80vh-220px)] rounded-md border md:h-[calc(80dvh-80px)]">
         <Table className="relative">
+          {/* TABLE HEADERS */}
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="cursor-pointer font-bold"
+                      onClick={
+                        header.column.getCanSort()
+                          ? header.column.getToggleSortingHandler()
+                          : undefined
+                      }
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                      {header.column.getCanSort() && (
+                        <span className="ml-1">
+                          {{
+                            asc: '↑',
+                            desc: '↓'
+                          }[header.column.getIsSorted() as string] ?? ''}
+                        </span>
+                      )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
           </TableHeader>
+
+          {/* TABLE BODY / ROWS */}
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (

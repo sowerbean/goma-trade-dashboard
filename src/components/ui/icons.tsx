@@ -12,7 +12,7 @@ import {
   HelpCircle,
   Image,
   Laptop,
-  LayoutDashboardIcon,
+  LayoutDashboardIcon, //home
   Loader2,
   LogIn,
   LucideIcon,
@@ -28,7 +28,12 @@ import {
   User,
   User2Icon,
   UserX2Icon,
-  X
+  X,
+  //My icons
+  Package, //suppliers
+  Users, //clients
+  Waypoints, //network
+  Info //about
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -78,5 +83,10 @@ export const Icons = {
     </svg>
   ),
   twitter: Twitter,
-  check: Check
+  check: Check,
+  // My icons
+  suppliers: Package, //suppliers
+  clients: Users, //clients
+  network: Waypoints, //network
+  about: Info //about
 };
