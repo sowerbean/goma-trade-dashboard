@@ -1,15 +1,14 @@
 // pages/suppliers/index.tsx
 import { useState, useEffect } from 'react';
+import { useOrderData } from '@/hooks/use-order-data';
+import { Tabs } from '@/components/ui/tabs';
+import { Order } from '@/types';
 import PageHead from '@/components/shared/page-head';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Footer from '@/components/shared/footer';
-
 import SupplierSelector from './components/supplier-selector';
 import SupplierProfileCard from './components/supplier-profile-card';
-import { useOrderData } from '@/hooks/use-order-data';
 import SupplierSummaryCards from './components/supplier-summary-cards';
 import SupplierClientFidelityTable from './components/supplier-clients-table';
-import { Order } from '@/types';
 import SupplierEvolutionChart from './components/supplier-evolution-chart';
 
 export default function SuppliersPage() {
@@ -25,8 +24,9 @@ export default function SuppliersPage() {
         )
       );
       if (uniqueSuppliers.length > 0) {
-        const randomPhone =
-          uniqueSuppliers[Math.floor(Math.random() * uniqueSuppliers.length)];
+        const randomPhone = uniqueSuppliers[
+          Math.floor(Math.random() * uniqueSuppliers.length)
+        ] as string;
         setSupplierPhone(randomPhone);
       }
     }
@@ -46,7 +46,7 @@ export default function SuppliersPage() {
           </TabsList> */}
           {/* Selector + Profile Card */}
           <SupplierSelector
-            value={supplierPhone ?? ''}
+            // value={supplierPhone ?? ""}
             onChange={(v) => setSupplierPhone(v)}
           />
           <SupplierProfileCard supplierPhone={supplierPhone} />

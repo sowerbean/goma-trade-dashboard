@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { validatePhoneNumber } from '@/lib/phone-number-valid';
 import { useOrderData } from '@/hooks/use-order-data';
+import { Order } from '@/types';
 
 export default function SupplierSelector({
   onChange
@@ -23,14 +24,17 @@ export default function SupplierSelector({
     const uniquePhones = Array.from(
       new Set(
         data
-          .map((order) => validatePhoneNumber(order.supplier_phone_number))
+          .map((order: Order) =>
+            validatePhoneNumber(order.supplier_phone_number)
+          )
           .filter(Boolean)
       )
     );
 
     if (uniquePhones.length > 0) {
-      const random =
-        uniquePhones[Math.floor(Math.random() * uniquePhones.length)];
+      const random = uniquePhones[
+        Math.floor(Math.random() * uniquePhones.length)
+      ] as string;
       setInput(random!);
       onChange?.(random!);
       setHasAutofilled(true); // Prevent future autofills

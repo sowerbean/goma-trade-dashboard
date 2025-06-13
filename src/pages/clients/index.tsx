@@ -18,7 +18,7 @@ export default function ClientsPage() {
     if (!clientId && orders?.length) {
       const uniqueClients = Array.from(
         new Set(orders.map((o: Order) => o.client_id).filter(Boolean))
-      );
+      ) as string[];
       if (uniqueClients.length > 0) {
         const randomClient =
           uniqueClients[Math.floor(Math.random() * uniqueClients.length)];
@@ -36,7 +36,7 @@ export default function ClientsPage() {
         </div>
 
         <ClientSelector value={clientId ?? ''} onChange={setClientId} />
-        <ClientProfileCard clientId={clientId} orders={orders ?? []} />
+        {clientId && <ClientProfileCard clientId={clientId} />}
         <ClientSummaryCards clientId={clientId} orders={orders ?? []} />
         <ClientEvolutionChart
           key={clientId}

@@ -21,7 +21,7 @@ export default function SupplierClientFidelityTable({
   supplierId
 }: SupplierClientFidelityTableProps) {
   const [search, setSearch] = useState('');
-  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
+  const [, setSelectedClientId] = useState<string | null>(null);
 
   const groupedClients = useMemo(() => {
     const filtered = orders.filter(

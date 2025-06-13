@@ -4,12 +4,13 @@ import { useMemo } from 'react';
 import { useOrderData } from '@/hooks/use-order-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Order } from '@/types';
 
 export default function ClientProfileCard({ clientId }: { clientId: string }) {
   const { data: orders } = useOrderData();
 
   const clientOrders = useMemo(
-    () => orders?.filter((o) => o.client_id === clientId) || [],
+    () => orders?.filter((o: Order) => o.client_id === clientId) || [],
     [orders, clientId]
   );
 
@@ -17,7 +18,7 @@ export default function ClientProfileCard({ clientId }: { clientId: string }) {
   const goodsTypes = useMemo(
     () =>
       Array.from(
-        new Set(clientOrders.map((o) => o.goods_type).filter(Boolean))
+        new Set(clientOrders.map((o: Order) => o.goods_type).filter(Boolean))
       ),
     [clientOrders]
   );

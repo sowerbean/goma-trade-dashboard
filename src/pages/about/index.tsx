@@ -10,8 +10,8 @@ export default function AboutPage() {
         More Info soon!
       </span>
       <h2 className="font-heading my-2 text-2xl font-bold">
-        This tools was developped to help businesses based in Goma to make more
-        informed decisions.
+        This a platform being developped by GRAVITAS sarl to help small, medium
+        and big businesses based in Goma to make more informed decisions.
       </h2>
       <div className="mt-8 flex justify-center gap-2">
         <Button onClick={() => router.back()} variant="default" size="lg">

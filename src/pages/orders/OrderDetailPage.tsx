@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useRouter } from '@/routes/hooks';
 import { ChevronLeftIcon, ShareIcon } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
-import InterestChannel from './components/interest-channel';
+// import InterestChannel from './components/interest-channel';
 import OrderFeedTable from './components/order-feed-table';
 import { useGetOrders } from './queries/client-pagination';
 
@@ -127,9 +127,9 @@ export default function OrderDetailPage() {
 
       {/* Channels or Tags */}
       <div className="flex items-center justify-center">
-        <InterestChannel title="Export" />
+        {/* <InterestChannel title="Export" />
         <InterestChannel title="Traceability" />
-        <InterestChannel title="Compliance" />
+        <InterestChannel title="Compliance" /> */}
       </div>
 
       {/* Feed Table for Orders */}

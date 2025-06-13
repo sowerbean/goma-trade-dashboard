@@ -27,7 +27,7 @@
 // import PopupModal from '@/components/shared/popup-modal';
 import TableSearchInput from '@/components/shared/table-search-input';
 import { Button } from '@/components/ui/button';
-import { DownloadIcon, PlusCircle } from 'lucide-react';
+import { DownloadIcon } from 'lucide-react';
 
 export default function OrderTableActions() {
   return (

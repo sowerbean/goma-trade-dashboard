@@ -37,7 +37,7 @@ export default function ClientOrdersEvolutionChart({
       let key = '0000-00';
 
       if (dateStr && dateStr.includes('/')) {
-        const [day, month, year] = dateStr.split('/');
+        const [, month, year] = dateStr.split('/');
         if (year && month) {
           key = `${year}-${month.padStart(2, '0')}`;
         }

@@ -10,7 +10,7 @@ const NotFound = lazy(() => import('@/pages/not-found'));
 // Pages
 const DashboardPage = lazy(() => import('@/pages/dashboard')); // '/'
 const OrderPage = lazy(() => import('@/pages/orders'));
-const OrderDetailPage = lazy(() => import('@/pages/orders/OrderDetailPage'));
+// const OrderDetailPage = lazy(() => import('@/pages/orders/OrderDetailPage'));
 const FormPage = lazy(() => import('@/pages/form'));
 
 // New pages from navItems
@@ -37,7 +37,7 @@ export default function AppRouter() {
       children: [
         { index: true, element: <DashboardPage /> },
         { path: 'order', element: <OrderPage /> },
-        { path: 'order/details', element: <OrderDetailPage /> },
+        // { path: 'order/details', element: <OrderDetailPage /> },
         { path: 'form', element: <FormPage /> },
         { path: 'suppliers', element: <SuppliersPage /> },
         { path: 'clients', element: <ClientsPage /> },

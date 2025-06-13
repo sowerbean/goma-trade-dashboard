@@ -6,8 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 // Use environment variables
 const DATA_URL = import.meta.env.VITE_DATA_URL;
-const SUPPLIERS_VALID_WHATSAPP_URL = import.meta.env
-  .VITE_SUPPLIERS_VALID_WHATSAPP_URL;
+// const SUPPLIERS_VALID_WHATSAPP_URL = import.meta.env.VITE_SUPPLIERS_VALID_WHATSAPP_URL;
 
 export const useOrderData = () => {
   return useQuery({

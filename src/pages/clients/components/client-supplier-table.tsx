@@ -80,7 +80,11 @@ export default function ClientSuppliersTable({
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            No orders found for this client.
+            NO ORDERS found for this client.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Note that some orders might be found but they are from anonymous
+            supplier they cant appear in this table
           </p>
         </CardContent>
       </Card>

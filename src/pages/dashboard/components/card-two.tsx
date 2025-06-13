@@ -1,5 +1,3 @@
-// components/cards/card-two.tsx
-import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useOrderData } from '@/hooks/use-order-data';
 import { parseDate } from '@/lib/date-parsing-sorting';

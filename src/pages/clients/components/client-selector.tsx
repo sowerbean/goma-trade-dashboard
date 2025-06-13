@@ -5,13 +5,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useOrderData } from '@/hooks/use-order-data';
 
+type ClientSelectorProps = {
+  value: string;
+  onChange?: (clientId: string | null) => void;
+};
+
 export default function ClientSelector({
   value,
   onChange
-}: {
-  value: string;
-  onChange?: (clientId: string | null) => void;
-}) {
+}: ClientSelectorProps) {
   const { data, isLoading } = useOrderData();
   const [input, setInput] = useState(value);
   const [hasAutofilled, setHasAutofilled] = useState(false);
@@ -27,8 +29,8 @@ export default function ClientSelector({
     if (uniqueClientIds.length > 0) {
       const randomClient =
         uniqueClientIds[Math.floor(Math.random() * uniqueClientIds.length)];
-      setInput(randomClient);
-      onChange?.(randomClient);
+      setInput(randomClient as string);
+      onChange?.(randomClient as string);
       setHasAutofilled(true);
     }
   }, [data, hasAutofilled, onChange, value]);
