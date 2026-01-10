@@ -537,7 +537,9 @@ export default function NetworkPage() {
         <Card className="mt-8 border-muted/40 shadow-sm">
           <CardHeader>
             <CardTitle>Supplier Ranking</CardTitle>
-            <CardDescription>Best to least favorite suppliers</CardDescription>
+            <CardDescription>
+              Best to least favorite suppliers in 2025
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {rankingRows.length === 0 ? (
@@ -569,7 +571,7 @@ export default function NetworkPage() {
                         <TableCell>{row.name}</TableCell>
                         <TableCell>+{row.phone}</TableCell>
                         <TableCell className="font-bold">
-                          {formatPercent(row.loyaltyRatio, 0)}
+                          {row.loyaltyRatio}
                         </TableCell>
                         <TableCell>{row.returningClients}</TableCell>
                         <TableCell>{row.goodsType}</TableCell>
