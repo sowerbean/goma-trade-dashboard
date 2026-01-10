@@ -2,10 +2,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 // Replace with your local path or remote URL
-// const DATA_URL = '../../data/json_goma_trade_data.json';
+const DATA_URL = '../../data/json_bukavu_trade_data.json';
 
 // Use environment variables
-const DATA_URL = import.meta.env.VITE_DATA_URL;
+// const DATA_URL = import.meta.env.VITE_DATA_URL;
 // const SUPPLIERS_VALID_WHATSAPP_URL = import.meta.env.VITE_SUPPLIERS_VALID_WHATSAPP_URL;
 
 export const useOrderData = () => {
