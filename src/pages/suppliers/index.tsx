@@ -6,7 +6,7 @@ import { Order } from '@/types';
 import PageHead from '@/components/shared/page-head';
 import Footer from '@/components/shared/footer';
 import SupplierSelector from './components/supplier-selector';
-import SupplierProfileCard from './components/supplier-profile-card';
+import SupplierProfileCard from './components/Supplier-profile-card';
 import SupplierSummaryCards from './components/supplier-summary-cards';
 import SupplierClientFidelityTable from './components/supplier-clients-table';
 import SupplierEvolutionChart from './components/supplier-evolution-chart';

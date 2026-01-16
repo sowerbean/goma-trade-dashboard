@@ -93,11 +93,6 @@ function supplierWithMostUniqueClients(orders: Order[]): {
   return { supplierPhone: bestSupplier, clientCount: maxClients };
 }
 
-function formatPercent(value?: number, fractionDigits = 0) {
-  const v = typeof value === 'number' && isFinite(value) ? value : 0;
-  return `${(v * 100).toFixed(fractionDigits)}%`;
-}
-
 type StatCardProps = {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   title: string;
@@ -269,11 +264,20 @@ export default function NetworkPage() {
       )?.supplier_name ?? 'N/A')
     : 'N/A';
 
-  // Loyalty winner (best return_ratio)
+  // Loyalty winner (most returning clients, then by ratio as tiebreaker)
   const loyaltyTop = stats.length
-    ? [...stats].sort(
-        (a: any, b: any) => (b?.return_ratio ?? 0) - (a?.return_ratio ?? 0)
-      )[0]
+    ? [...stats].sort((a: any, b: any) => {
+        // First, compare by number of returning clients (more is better)
+        const aReturnClients = a?.return_clients ?? 0;
+        const bReturnClients = b?.return_clients ?? 0;
+        if (bReturnClients !== aReturnClients) {
+          return bReturnClients - aReturnClients;
+        }
+        // If tied, use loyalty ratio as tiebreaker
+        const aRatio = parseFloat(a?.return_ratio ?? '0');
+        const bRatio = parseFloat(b?.return_ratio ?? '0');
+        return bRatio - aRatio;
+      })[0]
     : null;
 
   const loyaltyPhone = loyaltyTop?.supplier_phone_number ?? null;
@@ -284,10 +288,8 @@ export default function NetworkPage() {
       'N/A')
     : 'N/A';
 
-  const loyaltyRatio = stats.length ? (stats[0]?.return_ratio ?? 0) : 0;
-  const loyaltyReturnClients = stats.length
-    ? (stats[0]?.return_clients ?? 0)
-    : 0;
+  const loyaltyRatio = loyaltyTop?.return_ratio ?? '0%';
+  const loyaltyReturnClients = loyaltyTop?.return_clients ?? 0;
 
   // Overall Champion
   const championPhone = stats.length
@@ -315,7 +317,7 @@ export default function NetworkPage() {
         rank: idx + 1,
         name: s?.supplier_name ?? 'N/A',
         phone,
-        loyaltyRatio: s?.return_ratio ?? 0,
+        loyaltyRatio: s?.return_ratio ?? '0%',
         returningClients: s?.return_clients ?? 0,
         goodsType: goodsBySupplier.get(phone) ?? 'N/A'
       };
@@ -489,7 +491,7 @@ export default function NetworkPage() {
             icon={Repeat2}
             title={`Best Loyalty Rate (${championYear})`}
             primary={loyaltyName ?? 'N/A'}
-            secondary={`Loyalty: ${formatPercent(loyaltyRatio, 0)} • Returning clients: ${loyaltyReturnClients}`}
+            secondary={`Loyalty: ${loyaltyRatio} • Returning clients: ${loyaltyReturnClients}`}
             meta={loyaltyPhone ?? 'N/A'}
             className="bg-background"
           />
