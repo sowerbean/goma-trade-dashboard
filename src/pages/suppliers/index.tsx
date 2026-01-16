@@ -1,8 +1,7 @@
 // pages/suppliers/index.tsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useOrderData } from '@/hooks/use-order-data';
 import { Tabs } from '@/components/ui/tabs';
-import { Order } from '@/types';
 import PageHead from '@/components/shared/page-head';
 import Footer from '@/components/shared/footer';
 import SupplierSelector from './components/supplier-selector';
@@ -14,23 +13,6 @@ import SupplierEvolutionChart from './components/supplier-evolution-chart';
 export default function SuppliersPage() {
   const { data: orders } = useOrderData();
   const [supplierPhone, setSupplierPhone] = useState<string | null>(null);
-
-  // Pick a random supplier on first load
-  useEffect(() => {
-    if (!supplierPhone && orders?.length) {
-      const uniqueSuppliers = Array.from(
-        new Set(
-          orders.map((o: Order) => o.supplier_phone_number).filter(Boolean)
-        )
-      );
-      if (uniqueSuppliers.length > 0) {
-        const randomPhone = uniqueSuppliers[
-          Math.floor(Math.random() * uniqueSuppliers.length)
-        ] as string;
-        setSupplierPhone(randomPhone);
-      }
-    }
-  }, [orders, supplierPhone]);
 
   return (
     <>
@@ -44,28 +26,31 @@ export default function SuppliersPage() {
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="evolution">Evolution</TabsTrigger>
           </TabsList> */}
-          {/* Selector + Profile Card */}
-          <SupplierSelector
-            // value={supplierPhone ?? ""}
-            onChange={(v) => setSupplierPhone(v)}
-          />
-          <SupplierProfileCard supplierPhone={supplierPhone} />
+          {/* Selector */}
+          <SupplierSelector onChange={(v) => setSupplierPhone(v)} />
 
-          {/* three cards */}
-          <SupplierSummaryCards supplierPhone={supplierPhone} />
+          {/* Only show components when a valid supplier phone is selected */}
+          {supplierPhone && (
+            <>
+              <SupplierProfileCard supplierPhone={supplierPhone} />
 
-          {/* Line Chart */}
-          <SupplierEvolutionChart
-            key={supplierPhone} // <- this forces remount when phone changes
-            orders={orders ?? []}
-            supplierId={supplierPhone ?? ''}
-          />
+              {/* three cards */}
+              <SupplierSummaryCards supplierPhone={supplierPhone} />
 
-          {/* Table */}
-          <SupplierClientFidelityTable
-            orders={orders ?? []}
-            supplierId={supplierPhone ?? ''}
-          />
+              {/* Line Chart */}
+              <SupplierEvolutionChart
+                key={supplierPhone} // <- this forces remount when phone changes
+                orders={orders ?? []}
+                supplierId={supplierPhone}
+              />
+
+              {/* Table */}
+              <SupplierClientFidelityTable
+                orders={orders ?? []}
+                supplierId={supplierPhone}
+              />
+            </>
+          )}
         </Tabs>
         <Footer />
       </div>

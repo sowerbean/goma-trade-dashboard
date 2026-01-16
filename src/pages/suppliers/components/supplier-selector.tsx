@@ -1,45 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { validatePhoneNumber } from '@/lib/phone-number-valid';
 import { useOrderData } from '@/hooks/use-order-data';
-import { Order } from '@/types';
 
 export default function SupplierSelector({
   onChange
 }: {
   onChange?: (normalizedPhone: string | null) => void;
 }) {
-  const { data, isLoading } = useOrderData();
+  const { isLoading } = useOrderData();
   const [input, setInput] = useState('');
-  const [hasAutofilled, setHasAutofilled] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Run once on load to pick a random supplier
-  useEffect(() => {
-    if (!data || hasAutofilled) return;
-
-    const uniquePhones = Array.from(
-      new Set(
-        data
-          .map((order: Order) =>
-            validatePhoneNumber(order.supplier_phone_number)
-          )
-          .filter(Boolean)
-      )
-    );
-
-    if (uniquePhones.length > 0) {
-      const random = uniquePhones[
-        Math.floor(Math.random() * uniquePhones.length)
-      ] as string;
-      setInput(random!);
-      onChange?.(random!);
-      setHasAutofilled(true); // Prevent future autofills
-    }
-  }, [data, hasAutofilled, onChange]);
 
   const handleInputChange = (value: string) => {
     setInput(value);
