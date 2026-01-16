@@ -1,5 +1,5 @@
 // pages/suppliers/index.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useOrderData } from '@/hooks/use-order-data';
 import { Tabs } from '@/components/ui/tabs';
 import PageHead from '@/components/shared/page-head';
@@ -13,6 +13,17 @@ import SupplierEvolutionChart from './components/supplier-evolution-chart';
 export default function SuppliersPage() {
   const { data: orders } = useOrderData();
   const [supplierPhone, setSupplierPhone] = useState<string | null>(null);
+  const [initialPhone, setInitialPhone] = useState<string | null>(null);
+
+  // Read phone from URL parameter on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const phoneParam = params.get('phone');
+    if (phoneParam) {
+      setInitialPhone(phoneParam);
+      setSupplierPhone(phoneParam);
+    }
+  }, []);
 
   return (
     <>
@@ -27,7 +38,10 @@ export default function SuppliersPage() {
             <TabsTrigger value="evolution">Evolution</TabsTrigger>
           </TabsList> */}
           {/* Selector */}
-          <SupplierSelector onChange={(v) => setSupplierPhone(v)} />
+          <SupplierSelector
+            initialValue={initialPhone}
+            onChange={(v) => setSupplierPhone(v)}
+          />
 
           {/* Only show components when a valid supplier phone is selected */}
           {supplierPhone && (

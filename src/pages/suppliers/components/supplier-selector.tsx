@@ -1,19 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { validatePhoneNumber } from '@/lib/phone-number-valid';
 import { useOrderData } from '@/hooks/use-order-data';
 
 export default function SupplierSelector({
+  initialValue,
   onChange
 }: {
+  initialValue?: string | null;
   onChange?: (normalizedPhone: string | null) => void;
 }) {
   const { isLoading } = useOrderData();
   const [input, setInput] = useState('');
   const [error, setError] = useState<string | null>(null);
+
+  // Set initial value when provided
+  useEffect(() => {
+    if (initialValue) {
+      setInput(initialValue);
+      const normalized = validatePhoneNumber(initialValue);
+      if (normalized) {
+        setError(null);
+      } else {
+        setError('Invalid phone number');
+      }
+    }
+  }, [initialValue]);
 
   const handleInputChange = (value: string) => {
     setInput(value);

@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ThemeProvider from './theme-provider';
 import { SidebarProvider } from '@/hooks/use-sidebar';
 import { DateFilterProvider } from './date-filter-provider'; //for date filtering
+import { DataSourceProvider } from '@/contexts/data-source-context';
 
 export const queryClient = new QueryClient();
 
@@ -44,11 +45,13 @@ export default function AppProvider({
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <QueryClientProvider client={queryClient}>
               <ReactQueryDevtools />
-              <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-                <SidebarProvider>
-                  <DateFilterProvider>{children}</DateFilterProvider>
-                </SidebarProvider>
-              </ThemeProvider>
+              <DataSourceProvider>
+                <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+                  <SidebarProvider>
+                    <DateFilterProvider>{children}</DateFilterProvider>
+                  </SidebarProvider>
+                </ThemeProvider>
+              </DataSourceProvider>
             </QueryClientProvider>
           </ErrorBoundary>
         </BrowserRouter>

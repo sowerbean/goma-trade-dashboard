@@ -462,7 +462,9 @@ export default function NetworkPage() {
               </div>
             </div>
             <div className="flex gap-3">
-              <Button onClick={() => router.push('/suppliers')}>
+              <Button
+                onClick={() => router.push(`/suppliers?phone=${championPhone}`)}
+              >
                 View Supplier
               </Button>
             </div>
