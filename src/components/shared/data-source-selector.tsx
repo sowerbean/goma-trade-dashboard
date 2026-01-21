@@ -21,8 +21,8 @@ export default function DataSourceSelector() {
           <SelectValue placeholder="Select city" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="bukavu">Bukavu Data</SelectItem>
-          <SelectItem value="goma">Goma Data</SelectItem>
+          <SelectItem value="bukavu">Bukavu</SelectItem>
+          <SelectItem value="goma">Goma</SelectItem>
         </SelectContent>
       </Select>
     </div>

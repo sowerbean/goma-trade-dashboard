@@ -23,9 +23,7 @@ export default function Header() {
     <div className="flex flex-1 items-center justify-between bg-secondary px-4">
       <Heading title={headingText} />
       <div className="ml-4 flex items-center gap-3 md:ml-6">
-        <div className="border border-red-500">
-          <DataSourceSelector />
-        </div>
+        <DataSourceSelector />
         {/* <UserNav /> */}
         <ThemeToggle />
       </div>
