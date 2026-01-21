@@ -76,7 +76,7 @@ export default function GoodsBartChart() {
           tickLine={false}
           axisLine={false}
         />
-        <Tooltip />
+        <Tooltip labelStyle={{ color: '#808080' }} />
         <Bar dataKey="total" fill="#228292" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>

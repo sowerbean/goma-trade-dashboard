@@ -69,7 +69,7 @@ export default function ClientOrdersEvolutionChart() {
           axisLine={false}
           allowDecimals={false}
         />
-        <Tooltip />
+        <Tooltip labelStyle={{ color: '#808080' }} />
         <Line
           type="monotone"
           dataKey="total"

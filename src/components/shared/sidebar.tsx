@@ -7,6 +7,7 @@ import { ChevronsLeft } from 'lucide-react';
 import { useState } from 'react';
 import Logo from './logo';
 import ThemeToggle from '@/components/shared/theme-toggle';
+import DataSourceSelector from './data-source-selector';
 
 type SidebarProps = {
   className?: string;
@@ -57,11 +58,11 @@ export default function Sidebar({ className }: SidebarProps) {
           {/* <div className="space-y-4 py-4"> */}
           <div className="px-2 py-2">
             <div className="mt-3 space-y-1">
+              <DataSourceSelector />
               <DashboardNav items={navItems} />
             </div>
           </div>
         </div>
-
         {/* Theme Toggle at Bottom */}
         <div className="flex justify-center py-4">
           <div>
