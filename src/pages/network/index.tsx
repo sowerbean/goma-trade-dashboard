@@ -519,6 +519,7 @@ export default function NetworkPage() {
                     <XAxis dataKey="label" />
                     <YAxis />
                     <Tooltip
+                      labelStyle={{ color: '#808080' }}
                       formatter={(value: number) => [`${value}`, 'Packages']}
                     />
                     <Line

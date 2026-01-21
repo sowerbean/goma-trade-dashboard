@@ -81,7 +81,7 @@ export default function ClientOrdersEvolutionChart({
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
             <YAxis allowDecimals={false} />
-            <Tooltip />
+            <Tooltip labelStyle={{ color: '#808080' }} />
             <Line
               type="monotone"
               dataKey="count"
